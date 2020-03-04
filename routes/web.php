@@ -17,5 +17,6 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('/provider','HandlerApp@provider');
 
     /* provider data */
-    Route::get('types/{data}','karrillo_app@add_types')->name('types');
+    Route::get('types/{data}','karrillo_app@add_types_phone')->name('types');
+    Route::get('types_users/{data}','karrillo_app@add_types_user_data')->name('types_user');
 });
