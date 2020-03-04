@@ -2,14 +2,17 @@
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" >
-        <img class="navbar-brand-full" src="img/logo_lg.png" width="100%" height="100%" alt="Logo">
-        <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
-    </a>
-    <button class="navbar-toggler sidebar-toggler " type="button" data-toggle="sidebar-lg-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <h2> <span class="color_label">AUTO REPUESTOS</span>  <span class="color_label_business">KARRILLO</span></h2>
+    <div class="logo_empresa">
+        <a class="navbar-brand " >
+            <img class="navbar-brand-full " src="img/logo_lg.png" width="100%" height="100%" alt="Logo">
+            <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+        </a>
+    </div>
+
+{{--    <button class="navbar-toggler sidebar-toggler " type="button" data-toggle="sidebar-lg-show">--}}
+{{--        <span class="navbar-toggler-icon"></span>--}}
+{{--    </button>--}}
+    <h2 id="empresa" class="pl-3"> <span class="color_label">AUTO REPUESTOS</span>  <span class="color_label_business">KARRILLO</span></h2>
 
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown d-md-down-none">

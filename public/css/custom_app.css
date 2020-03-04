@@ -35,3 +35,37 @@
 .app-header .navbar-brand {
     width: 200px !important;
 }
+
+/*Media Query*/
+@media (max-width: 991px) {
+    .navbar-brand{
+        left:15% !important;
+    }
+    .app-header .navbar-brand {
+        width: 170px !important;
+    }
+
+    #empresa{
+        margin-left: 20% !important;
+    }
+}
+
+@media (max-width: 767px){
+
+    .logo_empresa img{
+        display: none;
+    }
+
+    #empresa{
+        margin-top: 0px !important;
+    }
+
+    #empresa .color_label{
+        display: none !important;
+    }
+
+    #empresa{
+        margin-left: 0% !important;
+    }
+}
+/*------------*/

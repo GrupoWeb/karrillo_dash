@@ -16,10 +16,13 @@ CREATE TABLE user_data
     nit varchar(200),
     first_name varchar(200),
     last_name varchar(200),
+    company_name varchar(200),
     address varchar(200),
     credit_days integer null,
     credit_limit integer null,
     type_user integer not null,
+    created_at timestamp,
+    updated_at timestamp
     foreign key (type_user) references type_user_data(type_user_data_id)
 
 )
