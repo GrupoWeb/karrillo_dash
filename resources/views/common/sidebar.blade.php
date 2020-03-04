@@ -2,7 +2,7 @@
     <ul class="nav">
         <li class="nav-title">Catálogos</li>
         <li class="nav-item">
-            <a class="nav-link" href="colors.html">
+            <a class="nav-link" href="/provider">
                 <i class="nav-icon fas fa-dolly-flatbed"></i> Proveedores</a>
         </li>
         <li class="nav-item">
