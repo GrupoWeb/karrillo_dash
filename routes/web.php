@@ -17,6 +17,7 @@ Route::get('/home', 'HomeController@home_index')->name('home');
 */
 Route::group(['middleware' => 'cors'], function(){
     Route::get('/provider','HandlerApp@provider');
+    Route::get('/search_provider','HandlerApp@search_provider');
 
     /* provider data */
     Route::get('types/{data}','karrillo_app@add_types_phone')->name('types');

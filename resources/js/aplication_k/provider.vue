@@ -59,21 +59,6 @@
                 </el-form-item>
             </el-form>
         </el-card>
-        <el-card class="box-card mt-3">
-            <div slot="header" >
-                <span>Proveedores</span>
-            </div>
-            <el-table :data="handle_provider" style="width: 100%"  :ref="'tables_data'">
-                <el-table-column label="Empresa" prop="company_name"></el-table-column>
-                <el-table-column label="Dirección" prop="address"></el-table-column>
-                <el-table-column label="Nit" prop="nit"></el-table-column>
-                <el-table-column label="Días de Credito" prop="credit_days"></el-table-column>
-                <el-table-column label="Teléfono Principal" prop="principal"></el-table-column>
-                <el-table-column label="Teléfono Secundario" prop="secundario"></el-table-column>
-                <el-table-column label="Nombre contacto" prop="contact_name"></el-table-column>
-                <el-table-column label="Teléfono Contacto" prop="contacto"></el-table-column>
-            </el-table>
-        </el-card>
     </div>
 </template>
 
@@ -137,34 +122,6 @@
                       }
 
                   })
-            },
-            handle_style_table_bootstrap(table_info){                               
-                const table = this.$refs[table_info].$el.children[1].children[0].classList;
-                const header = this.$refs[table_info].$el.children[1].children[0].children[1].classList;
-                const body = this.$refs[table_info].$el.children[2].children[0].classList;
-                
-                
-                table.add('table');
-                table.add('table-striped');
-                table.add('table-bordered');
-                table.add('table-hover');
-                header.add('thead-dark');
-                header.add('text-center');
-                body.add('table');
-                body.add('table-bordered');
-                body.add('bordered');
-                
-                
-          
-
-            },
-            handle_data_provider (){
-                this.handle_style_table_bootstrap('tables_data');
-
-                let url ='/get_provider';
-                axios.get(url).then(response => {
-                    this.handle_provider = response.data;
-                })
             },
             handleInputl(referencia){
                 const ext = this.$refs[referencia].$el;
