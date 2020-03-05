@@ -63,7 +63,7 @@
             <div slot="header" >
                 <span>Proveedores</span>
             </div>
-            <el-table :data="handle_provider" style="width: 100%" border :ref="'tables_data'">
+            <el-table :data="handle_provider" style="width: 100%"  :ref="'tables_data'">
                 <el-table-column label="Empresa" prop="company_name"></el-table-column>
                 <el-table-column label="Dirección" prop="address"></el-table-column>
                 <el-table-column label="Nit" prop="nit"></el-table-column>
@@ -138,13 +138,24 @@
 
                   })
             },
-            handle_style_table_bootstrap(table_info){
+            handle_style_table_bootstrap(table_info){                               
                 const table = this.$refs[table_info].$el.children[1].children[0].classList;
+                const header = this.$refs[table_info].$el.children[1].children[0].children[1].classList;
+                const body = this.$refs[table_info].$el.children[2].children[0].classList;
+                
+                
                 table.add('table');
                 table.add('table-striped');
                 table.add('table-bordered');
                 table.add('table-hover');
-                table.children[1].classList.add('thead-dark');
+                header.add('thead-dark');
+                header.add('text-center');
+                body.add('table');
+                body.add('table-bordered');
+                body.add('bordered');
+                
+                
+          
 
             },
             handle_data_provider (){
@@ -179,5 +190,19 @@
         text-transform: uppercase;
     }
 
+    .text-center th{
+        text-align: center !important;
+        font-size: 12px !important;
+        text-transform: uppercase;
+    }
+
+    .bordered td{
+        border:1px solid #000 !important;
+    }
+
+    .el-table--enable-row-hover .el-table__body tr:hover>td{
+        color: #212529 !important;
+        background-color: rgba(0, 0, 0, 0.075) !important;
+    }
 
 </style>
