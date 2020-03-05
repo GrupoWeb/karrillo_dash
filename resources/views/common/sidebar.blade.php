@@ -1,9 +1,23 @@
 <nav class="sidebar-nav">
     <ul class="nav">
         <li class="nav-title">Catálogos</li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="/provider">
                 <i class="nav-icon fas fa-dolly-flatbed"></i> Proveedores</a>
+        </li> -->
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon fas fa-dolly-flatbed"></i> Proveedores</a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" href="/provider">
+                        <i class="nav-icon fas fa-plus-square"></i> Ingreso</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search_provider">
+                        <i class="nav-icon fas fa-search-plus"></i> Buscar</a>
+                </li>
+            </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="typography.html">
