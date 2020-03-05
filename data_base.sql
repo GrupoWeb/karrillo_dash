@@ -24,6 +24,7 @@ CREATE TABLE user_data
     created_at timestamp,
     updated_at timestamp,
     contact_name varchar(200),
+    status integer,
     foreign key (type_user) references type_user_data(type_user_data_id)
 
 )
