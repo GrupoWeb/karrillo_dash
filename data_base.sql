@@ -22,7 +22,8 @@ CREATE TABLE user_data
     credit_limit integer null,
     type_user integer not null,
     created_at timestamp,
-    updated_at timestamp
+    updated_at timestamp,
+    contact_name varchar(200),
     foreign key (type_user) references type_user_data(type_user_data_id)
 
 )

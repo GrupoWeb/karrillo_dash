@@ -8,7 +8,7 @@
                 <el-row :gutter="20">
                     <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="12">
                         <el-form-item label="Nombre Empresa:" >
-                            <el-input v-model="form.company"></el-input>
+                            <el-input v-model="form.company" :ref="'company_name'"  @change="handleInputl('company_name')"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="12">
@@ -34,9 +34,14 @@
                             <el-input v-model="form.phone_p"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="4">
+                    <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="8">
                         <el-form-item label="Teléfono Secundario:">
                             <el-input v-model="form.phone_s"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="12">
+                        <el-form-item label="Nombre Contacto:" >
+                            <el-input v-model="form.contact_name" :ref="'contact_name'"  @change="handleInputl('contact_name')"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="4">
@@ -58,14 +63,15 @@
             <div slot="header" >
                 <span>Proveedores</span>
             </div>
-            <el-table :data="handle_provider" style="width: 100%">
+            <el-table :data="handle_provider" style="width: 100%"  :ref="'tables_data'">
                 <el-table-column label="Empresa" prop="company_name"></el-table-column>
                 <el-table-column label="Dirección" prop="address"></el-table-column>
                 <el-table-column label="Nit" prop="nit"></el-table-column>
                 <el-table-column label="Días de Credito" prop="credit_days"></el-table-column>
-                <el-table-column label="Teléfono Principal" ></el-table-column>
-                <el-table-column label="Teléfono Secundario"></el-table-column>
-                <el-table-column label="Teléfono Contacto"></el-table-column>
+                <el-table-column label="Teléfono Principal" prop="principal"></el-table-column>
+                <el-table-column label="Teléfono Secundario" prop="secundario"></el-table-column>
+                <el-table-column label="Nombre contacto" prop="contact_name"></el-table-column>
+                <el-table-column label="Teléfono Contacto" prop="contacto"></el-table-column>
             </el-table>
         </el-card>
     </div>
@@ -84,6 +90,7 @@
                     phone_p: '',
                     phone_s: '',
                     phone_c: '',
+                    contact_name:''
 
                 },
                 fullscreenLoading: false,
@@ -106,7 +113,8 @@
                       credit_days_data: this.form.credit_days,
                       phone_p_data: this.form.phone_p,
                       phone_s_data: this.form.phone_s,
-                      phone_c_data: this.form.phone_c
+                      phone_c_data: this.form.phone_c,
+                      contact_name: this.form.contact_name
                   },config).then(response => {
                       const status = JSON.parse(response.status);
                       if (status == "200") {
@@ -117,6 +125,7 @@
                           this.form.phone_c = '';
                           this.form.phone_s = '';
                           this.form.phone_p = '';
+                          this.form.contact_name = '';
                           this.$message({
                               message: h("p", null, [
                                   h("i", { style: "color: teal" }, "Proveedor Almacenado!")
@@ -129,12 +138,39 @@
 
                   })
             },
+            handle_style_table_bootstrap(table_info){                               
+                const table = this.$refs[table_info].$el.children[1].children[0].classList;
+                const header = this.$refs[table_info].$el.children[1].children[0].children[1].classList;
+                const body = this.$refs[table_info].$el.children[2].children[0].classList;
+                
+                
+                table.add('table');
+                table.add('table-striped');
+                table.add('table-bordered');
+                table.add('table-hover');
+                header.add('thead-dark');
+                header.add('text-center');
+                body.add('table');
+                body.add('table-bordered');
+                body.add('bordered');
+                
+                
+          
+
+            },
             handle_data_provider (){
+                this.handle_style_table_bootstrap('tables_data');
+
                 let url ='/get_provider';
                 axios.get(url).then(response => {
                     this.handle_provider = response.data;
                 })
-            }
+            },
+            handleInputl(referencia){
+                const ext = this.$refs[referencia].$el;
+                this.$refs[referencia].$el.children[0].classList.add('upperCase_text');
+                console.log(ext);
+            },
         }
     }
 </script>
@@ -149,4 +185,24 @@
     .el-form-item__label{
         font-weight:bold;
     }
+
+    .upperCase_text{
+        text-transform: uppercase;
+    }
+
+    .text-center th{
+        text-align: center !important;
+        font-size: 12px !important;
+        text-transform: uppercase;
+    }
+
+    .bordered td{
+        border:1px solid #000 !important;
+    }
+
+    .el-table--enable-row-hover .el-table__body tr:hover>td{
+        color: #212529 !important;
+        background-color: rgba(0, 0, 0, 0.075) !important;
+    }
+
 </style>
