@@ -43,7 +43,7 @@ class karrillo_app extends Controller
             max(case when phones.type_id = '1' then number end) as principal, max(case when phones.type_id = '2' then number end) as secundario, max(case when phones.type_id = '3' then number end) as contacto
                 FROM user_data provider
                         LEFT JOIN phone_data phones ON phones.user_data_id = provider.user_data_id
-                WHERE provider.status = 1 and provider.company_name LIKE '".$request->dato."' or provider.nit LIKE '".$request->dato."'
+                WHERE provider.status = 1 and provider.company_name LIKE '%".$request->dato."%' or provider.nit LIKE '%".$request->dato."%'
                 group by provider.company_name,1,2,3
                 order by provider.company_name ;");
         return response()->json($data_response, 200);
