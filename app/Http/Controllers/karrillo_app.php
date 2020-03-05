@@ -7,6 +7,7 @@ use App\Model\types;
 use App\Model\type_user_data;
 use App\Model\users;
 use App\Model\phone_data;
+use Illuminate\Support\Facades\DB;
 
 class karrillo_app extends Controller
 {
@@ -33,7 +34,7 @@ class karrillo_app extends Controller
     }
 
     public function get_provider(){
-        $data_response = users::all();
+        $data_response = DB::SELECT('call get_provider_data();');
         return response()->json($data_response, 200);
     }
 
@@ -44,12 +45,13 @@ class karrillo_app extends Controller
         $data_provider->nit = $request->nit_data;
         $data_provider->credit_days = $request->credit_days_data;
         $data_provider->type_user = 1;
+        $data_provider->contact_name = $request->contact_name;
         $data_provider->save();
         $id_new = $data_provider->id;
 
         $data_phone = new phone_data;
         $data_phone->user_data_id = $id_new;
-        $data_phone->type_id = 2;
+        $data_phone->type_id = 1;
         $data_phone->number = $request->phone_p_data;
         $data_phone->save();
 
@@ -61,7 +63,7 @@ class karrillo_app extends Controller
 
         $data_phone = new phone_data;
         $data_phone->user_data_id = $id_new;
-        $data_phone->type_id = 2;
+        $data_phone->type_id = 3;
         $data_phone->number = $request->phone_c_data;
         $data_phone->save();
 
