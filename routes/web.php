@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@home_index')->name('home');
 Route::group(['middleware' => 'cors'], function(){
     Route::get('/provider','HandlerApp@provider');
     Route::get('/search_provider','HandlerApp@search_provider');
+    Route::get('client','HandlerApp@client');
 
     /* provider data */
     Route::get('types/{data}','karrillo_app@add_types_phone')->name('types');
@@ -27,5 +28,12 @@ Route::group(['middleware' => 'cors'], function(){
     Route::post('get_provider_filter','karrillo_app@get_provider_filter');
     Route::post('update_provider_data','karrillo_app@update_provider_data');
     Route::post('delete_provider_data','karrillo_app@delete_provider_data');
+
+    /* Client Data*/
+    Route::post('addClient','karrillo_app@add_client_data');
+    Route::get('get_client','karrillo_app@get_client');
+
+
+
 
 });

@@ -83,7 +83,7 @@
             }
         },
         mounted() {
-            this.handle_data_provider();
+
         },
         methods: {
             onSubmit (){
@@ -118,7 +118,7 @@
                               type: 'success'
                           });
                           this.fullscreenLoading = false;
-                          this.handle_data_provider();
+
                       }
 
                   })

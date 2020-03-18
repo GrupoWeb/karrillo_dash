@@ -36,6 +36,7 @@ Vue.use(ElementUI, { locale });
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('provider-component', require('./aplication_k/provider').default);
 Vue.component('search-component', require('./aplication_k/search_provider').default);
+Vue.component('client-component', require('./aplication_k/client').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

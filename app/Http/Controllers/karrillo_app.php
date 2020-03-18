@@ -34,7 +34,21 @@ class karrillo_app extends Controller
     }
 
     public function get_provider(){
-        $data_response = DB::SELECT('call get_provider_data();');
+        $data_response = DB::SELECT('SELECT
+                           provider.user_data_id,
+                           provider.nit,
+                           provider.address,
+                           provider.credit_days,
+                           provider.credit_limit,
+                           UPPER(provider.company_name) AS company_name,
+                           UPPER(provider.contact_name) AS contact_name,
+                           max(case when phones.type_id = \'1\' then number end) as principal,
+                           max(case when phones.type_id = \'2\' then number end) as secundario,
+                           max(case when phones.type_id = \'3\' then number end) as contacto
+                    FROM user_data provider
+                             LEFT JOIN phone_data phones ON phones.user_data_id = provider.user_data_id
+                    WHERE provider.status = 1
+                    group by provider.company_name,1,2,3');
         return response()->json($data_response, 200);
     }
 
@@ -57,6 +71,7 @@ class karrillo_app extends Controller
         $data_provider->credit_days = $request->credit_days_data;
         $data_provider->type_user = 1;
         $data_provider->contact_name = $request->contact_name;
+        $data_provider->status = 1;
         $data_provider->save();
         $id_new = $data_provider->id;
 
@@ -83,7 +98,7 @@ class karrillo_app extends Controller
 
     public function update_provider_data(Request $request){
         $count_phone = phone_data::select('phone_id')->where('user_data_id' ,'=', $request->id)->count();
-        
+
         if($count_phone > 0){
             $update = users::where('user_data_id', $request->id)->update([
                 'nit' => $request->nit_data,
@@ -133,4 +148,57 @@ class karrillo_app extends Controller
         return response()->json($delete, 200);
     }
 
+
+    public function add_client_data(Request $request){
+        $data_provider = new users;
+        $data_provider->first_name = $request->first_name;
+        $data_provider->last_name = $request->last_name;
+        $data_provider->address = $request->address_data;
+        $data_provider->nit = $request->nit_data;
+        $data_provider->credit_limit = $request->credit_limit_data;
+        $data_provider->type_user = 2;
+        $data_provider->contact_name = $request->contact_name;
+        $data_provider->status = 1;
+        $data_provider->save();
+        $id_new = $data_provider->id;
+
+        $data_phone = new phone_data;
+        $data_phone->user_data_id = $id_new;
+        $data_phone->type_id = 1;
+        $data_phone->number = $request->phone_p_data;
+        $data_phone->save();
+
+        $data_phone = new phone_data;
+        $data_phone->user_data_id = $id_new;
+        $data_phone->type_id = 2;
+        $data_phone->number = $request->phone_s_data;
+        $data_phone->save();
+
+        $data_phone = new phone_data;
+        $data_phone->user_data_id = $id_new;
+        $data_phone->type_id = 3;
+        $data_phone->number = $request->phone_c_data;
+        $data_phone->save();
+
+        return response()->json($data_provider, 200);
+    }
+
+    public function get_client(){
+        $data_response = DB::SELECT('SELECT
+                           provider.user_data_id,
+                           provider.nit,
+                           provider.address,
+                           provider.credit_days,
+                           provider.credit_limit,
+                           UPPER(provider.company_name) AS company_name,
+                           UPPER(provider.contact_name) AS contact_name,
+                           max(case when phones.type_id = \'1\' then number end) as principal,
+                           max(case when phones.type_id = \'2\' then number end) as secundario,
+                           max(case when phones.type_id = \'3\' then number end) as contacto
+                    FROM user_data provider
+                             LEFT JOIN phone_data phones ON phones.user_data_id = provider.user_data_id
+                    WHERE provider.status = 1
+                    group by provider.company_name,1,2,3');
+        return response()->json($data_response, 200);
+    }
 }
