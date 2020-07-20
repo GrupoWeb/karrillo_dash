@@ -26,7 +26,7 @@
                         <i class="nav-icon fas fa-plus-square"></i> Ingreso</a>
                 </li>
                 <li class="nav-item pl-3">
-                    <a class="nav-link" href="/search_provider">
+                    <a class="nav-link" href="/search_client">
                         <i class="nav-icon fas fa-search-plus"></i> Buscar</a>
                 </li>
             </ul>

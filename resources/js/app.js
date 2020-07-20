@@ -38,6 +38,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('provider-component', require('./aplication_k/provider').default);
 Vue.component('search-component', require('./aplication_k/search_provider').default);
 Vue.component('client-component', require('./aplication_k/client').default);
+Vue.component('searchclient-component', require('./aplication_k/search_client.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

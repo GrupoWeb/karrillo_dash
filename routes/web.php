@@ -32,6 +32,10 @@ Route::group(['middleware' => 'cors'], function(){
     /* Client Data*/
     Route::post('addClient','karrillo_app@add_client_data');
     Route::get('get_client','karrillo_app@get_client');
+    Route::get('search_client','HandlerApp@search_client'); 
+    Route::get('get_client','karrillo_app@get_client');
+    Route::post('get_client_filter','karrillo_app@get_client_filter');
+    Route::post('update_client_data','karrillo_app@update_client_data');
 
 
 

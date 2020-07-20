@@ -21,4 +21,8 @@ class HandlerApp extends Controller
     public function client(){
         return view('admin_karrillo.client');
     }
+
+    public function search_client(){
+        return view('admin_karrillo.search_client');
+    }
 }
