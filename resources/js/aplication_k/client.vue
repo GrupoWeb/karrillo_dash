@@ -1,5 +1,5 @@
 <template>
-    <div class="container-md">
+    <div class="container-md"> 
         <el-card class="box-card">
             <div slot="header" >
                 <span>Catálogos de Clientes</span>
@@ -24,7 +24,7 @@
                 </el-row>
 
                 <el-row :gutter="20">
-                    <el-col :xs="25" :sm="6" :md="8" :lg="6" :xl="8">
+                    <el-col :xs="25" :sm="6" :md="8" :lg="4" :xl="4">
                         <el-form-item label="Nit:">
                             <el-input v-model="form.nit"></el-input>
                         </el-form-item>
@@ -35,7 +35,7 @@
                         </el-form-item>
                     </el-col>
 
-                    <el-col :xs="25" :sm="8" :md="8" :lg="7" :xl="4">
+                    <el-col :xs="25" :sm="8" :md="8" :lg="7" :xl="8">
                         <el-form-item label="Teléfono Principal:">
                             <el-input v-model="form.phone_p"></el-input>
                         </el-form-item>
@@ -45,12 +45,14 @@
                             <el-input v-model="form.phone_s"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="25" :sm="8" :md="8" :lg="12" :xl="12">
+                </el-row>
+                <el-row :gutter="20">
+                    <el-col :xs="25" :sm="8" :md="8" :lg="12" :xl="16">
                         <el-form-item label="Nombre Contacto:" >
                             <el-input v-model="form.contact_name" :ref="'contact_name'"  @change="handleInputl('contact_name')"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="4">
+                    <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="8">
                         <el-form-item label="Teléfono Contacto:">
                             <el-input v-model="form.phone_c"></el-input>
                         </el-form-item>
