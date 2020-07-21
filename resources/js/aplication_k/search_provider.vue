@@ -145,7 +145,7 @@
             this.handle_data_provider();
         },
         methods: {
-            search_data (){
+            search_data (){ 
                 this.fullscreenLoadingSearch = true;
                 if(this.search === ''){
                     this.handle_style_table_bootstrap('tables_data');
@@ -159,10 +159,10 @@
                     this.handle_style_table_bootstrap('tables_data');
     
                     let url ='/get_provider_filter';
-                    console.log('data: ', this.search);
+                    
                     axios.post(url,{dato: this.search}).then(response => {
                         this.handle_provider = response.data;
-                        console.log(response.data);
+                        
                         this.fullscreenLoadingSearch = false;
                     })
                 }
