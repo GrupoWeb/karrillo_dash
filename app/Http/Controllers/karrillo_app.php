@@ -57,18 +57,19 @@ class karrillo_app extends Controller
             max(case when phones.type_id = '1' then number end) as principal, max(case when phones.type_id = '2' then number end) as secundario, max(case when phones.type_id = '3' then number end) as contacto
                 FROM user_data provider
                         LEFT JOIN phone_data phones ON phones.user_data_id = provider.user_data_id
-                WHERE provider.status = 1 and provider.company_name LIKE '%".$request->dato."%' or provider.nit LIKE '%".$request->dato."%' AND provider.type_user = 1
+                WHERE provider.status = 1 and provider.type_user = 1 and provider.company_name LIKE '%".$request->dato."%' or provider.nit LIKE '%".$request->dato."%'
                 group by provider.company_name,1,2,3
                 order by provider.company_name ;");
+                
         return response()->json($data_response, 200);
     }
 
     public function get_client_filter(Request $request){
-        $data_response = DB::SELECT("SELECT CONCAT(UPPER(provider.first_name),' ',UPPER(provider.last_name)) AS NAME,provider.user_data_id, provider.nit, provider.address, provider.credit_days, provider.credit_limit, UPPER(provider.company_name) AS company_name, UPPER(provider.contact_name) AS contact_name,
+        $data_response = DB::SELECT("SELECT provider.company_name AS name,provider.user_data_id, provider.nit, provider.address, provider.credit_days, provider.credit_limit, UPPER(provider.company_name) AS company_name, UPPER(provider.contact_name) AS contact_name,
             max(case when phones.type_id = '1' then number end) as principal, max(case when phones.type_id = '2' then number end) as secundario, max(case when phones.type_id = '3' then number end) as contacto
                 FROM user_data provider
                         LEFT JOIN phone_data phones ON phones.user_data_id = provider.user_data_id
-                WHERE provider.status = 1 and CONCAT(UPPER(provider.first_name), ' ',UPPER(provider.last_name)) LIKE '%".$request->dato."%' or provider.nit LIKE '%".$request->dato."%'  AND provider.type_user = 2
+                WHERE provider.status = 1 and provider.type_user = 2 and provider.company_name LIKE '%".$request->dato."%' or provider.nit LIKE '%".$request->dato."%'
                 group by provider.company_name,1,2,3
                 order by provider.company_name ;");
         return response()->json($data_response, 200);
@@ -163,7 +164,8 @@ class karrillo_app extends Controller
                 'credit_limit' => $request->credit_days_data,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'contact_name' => $request->contact_name
+                'contact_name' => $request->contact_name,
+                'company_name'  => $request->tradename,
             ]);
 
             $data_phone = phone_data::select('phone_id')->where('user_data_id' ,'=', $request->id)->get();
@@ -177,7 +179,8 @@ class karrillo_app extends Controller
                 'credit_limit' => $request->credit_days_data,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'contact_name' => $request->contact_name
+                'contact_name' => $request->contact_name,
+                'company_name'  => $request->tradename,
             ]);
 
             $data_phone = new phone_data;
@@ -212,6 +215,7 @@ class karrillo_app extends Controller
         $data_provider = new users;
         $data_provider->first_name = $request->first_name;
         $data_provider->last_name = $request->last_name;
+        $data_provider->company_name = $request->tradename;
         $data_provider->address = $request->address_data;
         $data_provider->nit = $request->nit_data;
         $data_provider->credit_limit = $request->credit_limit_data;
@@ -244,7 +248,7 @@ class karrillo_app extends Controller
 
     public function get_client(){
         $data_response = DB::SELECT('SELECT
-                           CONCAT(UPPER(provider.first_name),\' \',UPPER(provider.last_name)) AS name,
+                           provider.company_name AS name,
                            UPPER(provider.first_name) as first_name,
                            UPPER(provider.last_name) as last_name,
                            provider.user_data_id,

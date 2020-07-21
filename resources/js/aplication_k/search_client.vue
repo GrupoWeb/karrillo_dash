@@ -58,17 +58,22 @@
                     >
                     <el-form ref="form" :model="form" >
                 <el-row :gutter="20">
-                    <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="8">
+                    <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="5">
                         <el-form-item label="Nombres:" >
                             <el-input v-model="form.first_name" :ref="'first_name'"  @change="handleInputl('first_name')"></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="8">
+                    <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="5">
                         <el-form-item label="Apellidos:" >
                             <el-input v-model="form.last_name" :ref="'last_name'"  @change="handleInputl('last_name')"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="8">
+                        <el-form-item label="Nombre Comercial:" >
+                            <el-input v-model="form.tradename" :ref="'tradename'"  @change="handleInputl('tradename')"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :xs="25" :sm="12" :md="12" :lg="12" :xl="6">
                         <el-form-item label="Dirección:">
                             <el-input v-model="form.address"></el-input>
                         </el-form-item>
@@ -125,6 +130,7 @@
         data() {
             return{
                 form: {
+                    tradename: '',
                     first_name: '',
                     last_name: '',
                     company: '',
@@ -168,6 +174,7 @@
                     let url ='/get_client_filter';
                     axios.post(url,{dato: this.search}).then(response => {
                         this.handle_provider = response.data;
+                        
                         this.fullscreenLoadingSearch = false;
                     })
                 }
@@ -178,6 +185,7 @@
                 this.fullscreenLoading = true;
                 let url = '/update_client_data';
                   axios.post(url, {
+                      tradename: this.form.tradename,
                       first_name: this.form.first_name,
                       last_name: this.form.last_name,
                       address_data: this.form.address,
@@ -191,6 +199,7 @@
                   },config).then(response => {
                       const status = JSON.parse(response.status);
                       if (status == "200") {
+                          this.form.tradename = '';
                           this.form.first_name = '';
                           this.form.last_name = '';
                           this.form.address = '';
@@ -251,6 +260,7 @@
             handleEdit(index, row){
                 
                 this.dialogTableVisible = true;
+                this.form.tradename = row.name;
                 this.form.first_name = row.first_name;
                 this.form.last_name = row.last_name;
                 this.form.address = row.address;
