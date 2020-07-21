@@ -41,24 +41,24 @@
                     </el-col>
 
                     <el-col :xs="25" :sm="8" :md="8" :lg="7" :xl="8">
-                        <el-form-item label="Teléfono Principal:" prop="phone_p" :rules ="[{ required: true, message: 'Campo no puede ser vacio' , trigger: 'blur'}]">
+                        <el-form-item label="Teléfono Principal:" >
                             <el-input v-model="form.phone_p"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="25" :sm="8" :md="8" :lg="7" :xl="8">
-                        <el-form-item label="Teléfono Secundario:" prop="phone_s" :rules ="[{ required: true, message: 'Campo no puede ser vacio' , trigger: 'blur'}]">
+                        <el-form-item label="Teléfono Secundario:" >
                             <el-input v-model="form.phone_s"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row :gutter="20">
                     <el-col :xs="25" :sm="8" :md="8" :lg="12" :xl="16">
-                        <el-form-item label="Nombre Contacto:" prop="contact_name" :rules ="[{ required: true, message: 'Campo no puede ser vacio' , trigger: 'blur'}]">
+                        <el-form-item label="Nombre Contacto:" >
                             <el-input v-model="form.contact_name" :ref="'contact_name'"  @change="handleInputl('contact_name')"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="25" :sm="8" :md="8" :lg="8" :xl="8">
-                        <el-form-item label="Teléfono Contacto:" prop="phone_c" :rules ="[{ required: true, message: 'Campo no puede ser vacio' , trigger: 'blur'}]">
+                        <el-form-item label="Teléfono Contacto:" >
                             <el-input v-model="form.phone_c"></el-input>
                         </el-form-item>
                     </el-col>
